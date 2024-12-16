@@ -1,0 +1,41 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Todo List" class="action-bar">
+        <Label text="Todo List" class="text-xl font-bold"/>
+    </ActionBar>
+
+    <StackLayout class="bg-gray-100">
+        <!-- Add Todo Form -->
+        <GridLayout rows="auto" columns="*, auto" class="p-4 bg-white">
+            <TextField col="0" 
+                      hint="Add a new todo..."
+                      text="{{ newTodoText }}"
+                      returnKeyType="done"
+                      returnPress="{{ onAddTodo }}"
+                      class="input"/>
+            <Button col="1" 
+                    text="Add"
+                    tap="{{ onAddTodo }}"
+                    class="btn btn-primary m-l-8"/>
+        </GridLayout>
+
+        <!-- Todo List -->
+        <ListView items="{{ todos }}" class="list-group" height="100%">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *, auto" class="p-4 bg-white border-b border-gray-200">
+                    <Button col="0" 
+                            text="{{ completed ? '✓' : '○' }}"
+                            tap="{{ $parents['ListView'].onToggleTodo, id }}"
+                            class="{{ completed ? 'text-green-500' : 'text-gray-400' }}"/>
+                    <Label col="1" 
+                           text="{{ text }}"
+                           textWrap="true"
+                           class="{{ completed ? 'line-through text-gray-400' : 'text-gray-800' }} m-l-8"/>
+                    <Button col="2" 
+                            text="×"
+                            tap="{{ $parents['ListView'].onDeleteTodo, id }}"
+                            class="text-red-500"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </StackLayout>
+</Page>

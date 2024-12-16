@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.action-bar {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.list-group {
+  separator-color: transparent;
+}
+
+TextField {
+  padding: 12;
+  font-size: 16;
+  placeholder-color: #9ca3af;
+}
+
+Button {
+  font-size: 16;
+  font-weight: bold;
+  padding: 12;
+  border-radius: 8;
+}

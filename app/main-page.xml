@@ -1,0 +1,49 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Todo List" class="bg-blue-500">
+        <ActionBar.titleView>
+            <Label text="Todo List" class="text-xl text-white font-bold"/>
+        </ActionBar.titleView>
+    </ActionBar>
+
+    <GridLayout rows="auto, *">
+        <!-- Add Todo Input -->
+        <GridLayout row="0" columns="*, auto" class="p-4 bg-white border-b border-gray-200">
+            <TextField col="0" 
+                      id="todoInput"
+                      hint="Add a new todo..." 
+                      text="{{ newTodoText }}" 
+                      returnKeyType="done" 
+                      returnPress="onAddTodo"
+                      class="p-2 text-lg"/>
+            <Button col="1" 
+                    text="Add" 
+                    tap="onAddTodo" 
+                    class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg ml-2"/>
+        </GridLayout>
+
+        <!-- Todo List -->
+        <ListView row="1" items="{{ todos }}" class="list-group">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *, auto" class="p-4 bg-white border-b border-gray-200">
+                    <!-- Checkbox -->
+                    <Button col="0" 
+                            text="{{ completed ? '✓' : '○' }}" 
+                            tap="{{ $parents['ListView'].onToggleComplete }}"
+                            class="{{ completed ? 'text-green-500' : 'text-gray-400' }} text-xl"/>
+                    
+                    <!-- Todo Text -->
+                    <Label col="1" 
+                           text="{{ text }}" 
+                           textWrap="true"
+                           class="{{ completed ? 'line-through text-gray-400' : 'text-gray-800' }} ml-2"/>
+                    
+                    <!-- Delete Button -->
+                    <Button col="2" 
+                            text="🗑️" 
+                            tap="{{ $parents['ListView'].onDeleteTodo }}"
+                            class="text-red-500 font-bold"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>
